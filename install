@@ -79,6 +79,12 @@ git config --file ${HOME}/.gitconfig --add user.email "$GIT_EMAIL"
 
 echo "Installed .gitconfig"
 
+# Is there a custom.sh?
+if [ -e "${PWD}/custom.sh" ]; then
+	echo "Executing custom.sh"
+	source ${PWD}/custom.sh
+fi
+
 # load in the new .bash_profile immediately
 source ${HOME}/.bash_profile
 echo "Installed the new setup, into this terminal session"

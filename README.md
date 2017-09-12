@@ -12,6 +12,10 @@ The following setup, and applications are expected for these dotfiles to functio
 
 - Git, >2.0.1 (at `/usr/local/git/bin/git` on Mac)
 
+## Customisation
+
+If you'd like to customise anything or personal the dotfiles, you can do so by creating a `custom.sh` file in this directory. If it exists, it will be executed at the end of the install process.
+
 ## Setup
 
 1. Download this repository into:
