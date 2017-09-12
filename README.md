@@ -19,6 +19,9 @@ The following setup, and applications are expected for these dotfiles to functio
     - Mac: `/Library/Web/dotfiles`.
 1. Execute `cd /Library/Web/dotfiles`.
 1. Create either a `.mac` or `.linux` file with `touch .mac` in this repository's directory.
+1. Create a local `.gitconfig`:
+    - `git config --file ./.gitconfig --add user.name "Your Name"`
+    - `git config --file ./.gitconfig --add user.email "your@email.com"`
 1. Execute `./install`.
 
 _For Mac_, everything should be working now.

@@ -17,6 +17,24 @@ if [ -z "${PLATFORM+x}" ]; then
 	exit 1
 fi
 
+# check that we have user git information
+if [ ! -e "${PWD}/.gitconfig" ]; then
+	echo "You must create a local .gitconfig file with name and email."
+	exit 1
+fi
+
+# Make sure the user.name value exists.
+if ! git config --file ./.gitconfig --get user.name; then
+	echo "Use 'git config --file ./.gitconfig --add user.name \"Your Name\"'" to configure your name with Git.
+	exit 1
+fi
+
+# Make sure the user.email value exists.
+if ! git config --file ./.gitconfig --get user.email; then
+	echo "Use 'git config --file ./.gitconfig --add user.email \"your@email.com\"'" to configure your email with Git.
+	exit 1
+fi
+
 # backup the current ~/.bash_profile
 if [ -s "${HOME}/.bash_profile" ]; then
 	cp ${HOME}/.bash_profile ${HOME}/.bash_profile_dotfiles_bak
@@ -50,6 +68,15 @@ done
 
 # setup the gitconfig file which is specific to platform
 cp ${PWD}/platform/${PLATFORM}/.gitconfig ${HOME}/.gitconfig
+
+# Retrieve the local config.
+GIT_NAME=$(git config --file ./.gitconfig --get user.name)
+GIT_EMAIL=$(git config --file ./.gitconfig --get user.email)
+
+# Update the installed .gitconfig.
+git config --file ${HOME}/.gitconfig --add user.name "$GIT_NAME"
+git config --file ${HOME}/.gitconfig --add user.email "$GIT_EMAIL"
+
 echo "Installed .gitconfig"
 
 # load in the new .bash_profile immediately

@@ -1,6 +1,3 @@
-[user]
-	name = Scott Mebberson
-	email = scott@scottmebberson.com
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [diff]
