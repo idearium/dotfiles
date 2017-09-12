@@ -3,12 +3,19 @@
 alias lsl='ls -l'
 alias lsa='ls -la'
 
+# dir traversal
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
 # vagrant shortcuts
 alias v='vagrant'
 alias vs='vagrant ssh'
+alias vh='vagrant halt'
+alias vu='vagrant up'
 
 # git command shortcuts
-alias gs='git status'
+alias gs='git status -s'
 alias ga='git add -A'
 alias gav='git add */**/version.json && git add package.json'
 alias gp='git push'
