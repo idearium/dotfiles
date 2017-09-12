@@ -1,4 +1,5 @@
+custom.sh
 .mac
 .linux
+.bash_dotfiles
 /.gitconfig
-custom.sh

@@ -1,6 +1,2 @@
-
-# To specific directories
-alias dotfiles='cd /Library/Web/dotfiles/'
-
 # Recursively remove Apple meta files
 alias cleanupds="find . -type f -name '*.DS_Store' -ls -exec /bin/rm {} \;"

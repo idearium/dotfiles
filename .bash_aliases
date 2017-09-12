@@ -1,3 +1,5 @@
+# dotfiles
+alias dotfiles='cd $DOTFILES_LOCATION'
 
 # command shortcuts
 alias lsl='ls -l'

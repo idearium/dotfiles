@@ -66,6 +66,17 @@ for file in ".bash_profile" ".development" ".bash_aliases" ".bash_colors" ".bash
 
 done
 
+# Update the bash_profile with the location of `dotfiles`.
+BASH_DOTFILES=".bash_dotfiles"
+echo "export DOTFILES_LOCATION=${PWD}" >> ${PWD}/${BASH_DOTFILES}
+
+if [ -e ${HOME}/${BASH_DOTFILES} ]; then
+		rm ${HOME}/${BASH_DOTFILES}
+fi
+
+ln -s ${PWD}/${BASH_DOTFILES} ${HOME}/${BASH_DOTFILES}
+echo "Installed ${BASH_DOTFILES}"
+
 # setup the gitconfig file which is specific to platform
 cp ${PWD}/platform/${PLATFORM}/.gitconfig ${HOME}/.gitconfig
 
