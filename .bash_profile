@@ -26,7 +26,7 @@ for ref in ".development" ".bash_aliases" ".bash_colors" ".bash_prompt" ".bash_e
 done
 
 # Node.js version manager.
-export NVM_DIR="/Users/smebberson/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # Ruby version manager.
