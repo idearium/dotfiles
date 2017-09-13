@@ -18,11 +18,9 @@ If you'd like to customise anything or personal the dotfiles, you can do so by c
 
 ## Setup
 
-1. Download this repository into:
-    - Linux: `/projects/dotfiles`.
-    - Mac: `/Library/Web/dotfiles`.
-1. Execute `cd /Library/Web/dotfiles`.
-1. Create either a `.mac` or `.linux` file with `touch .mac` in this repository's directory.
+1. Execute `git clone https://github.com/idearium/dotfiles.git` to clone this repository.
+1. Execute `cd ./dotfiles`.
+1. Create either a `.mac` or `.linux` file (i.e. `touch .mac`) in this repository's directory.
 1. Create a local `.gitconfig`:
     - `git config --file ./.gitconfig --add user.name "Your Name"`
     - `git config --file ./.gitconfig --add user.email "your@email.com"`
@@ -32,7 +30,7 @@ _For Mac_, everything should be working now.
 
 _For Ubuntu_, follow these additional steps:
 
-1. Add the following to ~/.bashrc
+1. Add the following to ``~/.bashrc`
 
 ```sh
 if [ -f ~/.bash_profile ]; then
