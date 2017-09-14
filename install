@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+
+set PLATFORM
+
+# try and find a platform file
+for pf in "mac" "linux"; do
+
+	if [ -e "${PWD}/.${pf}" ]; then
+		PLATFORM=$pf
+	fi
+
+done
+
+# check that we have a platform variable
+if [ -z "${PLATFORM+x}" ]; then
+	echo "You must create either a .mac or .linux file in this folder."
+	exit 1
+fi
+
+# check that we have user git information
+if [ ! -e "${PWD}/.gitconfig" ]; then
+	echo "You must create a local .gitconfig file with name and email."
+	exit 1
+fi
+
+# Make sure the user.name value exists.
+if ! git config --file ./.gitconfig --get user.name; then
+	echo "Use 'git config --file ./.gitconfig --add user.name \"Your Name\"'" to configure your name with Git.
+	exit 1
+fi
+
+# Make sure the user.email value exists.
+if ! git config --file ./.gitconfig --get user.email; then
+	echo "Use 'git config --file ./.gitconfig --add user.email \"your@email.com\"'" to configure your email with Git.
+	exit 1
+fi
+
+# backup the current ~/.bash_profile
+if [ -s "${HOME}/.bash_profile" ]; then
+	cp ${HOME}/.bash_profile ${HOME}/.bash_profile_dotfiles_bak
+	rm ${HOME}/.bash_profile
+	echo "The previous .bash_profile was backed up."
+fi
+
+# create a platform file that will be loaded by .bash_profile
+echo "${PLATFORM}" > $HOME/.platform
+echo ".platform created"
+
+# install the various files
+for file in ".bash_profile" ".development" ".bash_aliases" ".bash_colors" ".bash_prompt" ".bash_exports" "z.sh" ".inputrc"; do
+
+	if [ -e ${PWD}/${file} ] && [ ! -h ${HOME}/${file} ]; then
+		ln -s ${PWD}/${file} ${HOME}/${file}
+		echo "Installed ${file}"
+	fi
+
+	# and their platform specific counterparts
+	for pf in "mac" "linux"; do
+
+		if [ -e "${PWD}/${file}_${pf}" ] && [ ! -h "${HOME}/${file}_${pf}" ] && [ "${PLATFORM}" = "${pf}" ]; then
+			ln -s "${PWD}/${file}_${pf}" "${HOME}/${file}_${pf}"
+			echo "Installed ${file}_${pf}"
+		fi
+
+	done
+
+done
+
+# Update the bash_profile with the location of `dotfiles`.
+BASH_DOTFILES=".bash_dotfiles"
+echo "export DOTFILES_LOCATION=${PWD}" >> ${PWD}/${BASH_DOTFILES}
+
+if [ -e ${HOME}/${BASH_DOTFILES} ]; then
+		rm ${HOME}/${BASH_DOTFILES}
+fi
+
+ln -s ${PWD}/${BASH_DOTFILES} ${HOME}/${BASH_DOTFILES}
+echo "Installed ${BASH_DOTFILES}"
+
+# setup the gitconfig file which is specific to platform
+cp ${PWD}/platform/${PLATFORM}/.gitconfig ${HOME}/.gitconfig
+
+# Retrieve the local config.
+GIT_NAME=$(git config --file ./.gitconfig --get user.name)
+GIT_EMAIL=$(git config --file ./.gitconfig --get user.email)
+
+# Update the installed .gitconfig.
+git config --file ${HOME}/.gitconfig --add user.name "$GIT_NAME"
+git config --file ${HOME}/.gitconfig --add user.email "$GIT_EMAIL"
+
+echo "Installed .gitconfig"
+
+# Is there a custom.sh?
+if [ -e "${PWD}/custom.sh" ]; then
+	echo "Executing custom.sh"
+	source ${PWD}/custom.sh
+fi
+
+# load in the new .bash_profile immediately
+source ${HOME}/.bash_profile
+echo "Installed the new setup, into this terminal session"

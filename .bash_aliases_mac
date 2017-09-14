@@ -1,0 +1,2 @@
+# Recursively remove Apple meta files
+alias cleanupds="find . -type f -name '*.DS_Store' -ls -exec /bin/rm {} \;"

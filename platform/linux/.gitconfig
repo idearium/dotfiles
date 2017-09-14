@@ -1,0 +1,4 @@
+[credential]
+	helper = cache --timeout=172800
+[push]
+	default = simple
