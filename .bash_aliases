@@ -1,6 +1,9 @@
 # dotfiles
 alias dotfiles='cd $DOTFILES_LOCATION'
 
+# general
+alias cleanuporig='git clean -f *.orig && git clean -f **/*.orig'
+
 # command shortcuts
 alias lsl='ls -l'
 alias lsa='ls -la'
