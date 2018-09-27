@@ -25,23 +25,37 @@ for ref in ".development" ".bash_aliases" ".bash_colors" ".bash_prompt" ".bash_e
 
 done
 
-# Node.js version manager.
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# Ruby version manager.
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-# Visual studio code command line
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-
+# Dotfiles command
 source "${HOME}/.bash_dotfiles"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/usr/local/bin/google-cloud-sdk/path.bash.inc' ]; then source '/usr/local/bin/google-cloud-sdk/path.bash.inc'; fi
+# Node.js version manager.
+if [ -e "$HOME/.nvm" ]; then
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+fi
+
+# Ruby version manager.
+if [ -e "$HOME/.rvm" ]; then
+	export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+	[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+fi
+
+# Visual studio code command line
+if [ -e "/Applications/Visual Studio Code.app" ]; then
+	export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+fi
+
+# Google Cloud SDK.
+if [ -f '/usr/local/bin/google-cloud-sdk/path.bash.inc' ]; then
+	source '/usr/local/bin/google-cloud-sdk/path.bash.inc'
+fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/usr/local/bin/google-cloud-sdk/completion.bash.inc' ]; then source '/usr/local/bin/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f '/usr/local/bin/google-cloud-sdk/completion.bash.inc' ]; then
+	source '/usr/local/bin/google-cloud-sdk/completion.bash.inc';
+fi
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# Yarn
+if [ -e "$HOME/.yarn/bin" ]; then
+	export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+fi
