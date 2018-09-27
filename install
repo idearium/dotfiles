@@ -50,7 +50,7 @@ echo ".platform created"
 for file in ".bash_profile" ".development" ".bash_aliases" ".bash_colors" ".bash_prompt" ".bash_exports" "z.sh" ".inputrc"; do
 
 	if [ -e ${PWD}/${file} ] && [ ! -h ${HOME}/${file} ]; then
-		ln -s ${PWD}/${file} ${HOME}/${file}
+		ln -fs ${PWD}/${file} ${HOME}/${file}
 		echo "Installed ${file}"
 	fi
 
@@ -68,7 +68,7 @@ done
 
 # Update the bash_profile with the location of `dotfiles`.
 BASH_DOTFILES=".bash_dotfiles"
-echo "export DOTFILES_LOCATION=${PWD}" >> ${PWD}/${BASH_DOTFILES}
+echo "export DOTFILES_LOCATION=${PWD}" > ${PWD}/${BASH_DOTFILES}
 
 if [ -e ${HOME}/${BASH_DOTFILES} ]; then
 		rm ${HOME}/${BASH_DOTFILES}
