@@ -10,45 +10,57 @@ fi
 
 # Install packages.
 packages=(
-    bash
-    bash-completion@2
-    git
-    hub
-    kubernetes-cli
-    nvm
-    packer
-    yarn --without-node
+    "bash"
+    "bash-completion@2"
+    "git"
+    "hub"
+    "kubernetes-cli"
+    "nvm"
+    "packer"
+    "yarn --without-node"
 )
 
-brew install "${packages[@]}"
+for package in "${packages[@]}"; do
+
+    if ! brew list -1 | grep -q "^${package}\$"; then
+        brew install $package
+    fi
+
+done
 
 # Install Cask.
 brew tap caskroom/cask
 
 # Install apps.
 apps=(
-    1password
-    browserstacklocal
-    docker
-    firefox
-    focus-booster
-    google-chrome
-    google-cloud-sdk
-    gpg-suite
-    kaleidoscope
-    moom
-    nordvpn
-    postman
-    sequel-pro
-    slack
-    transmit
-    vagrant
-    vagrant-vmware-utility
-    visual-studio-code
-    vmware-fusion10
+    "1password"
+    "browserstacklocal"
+    "docker"
+    "firefox"
+    "focus-booster"
+    "google-chrome"
+    "google-cloud-sdk"
+    "gpg-suite"
+    "kaleidoscope"
+    "moom"
+    "nordvpn"
+    "postman"
+    "sequel-pro"
+    "slack"
+    "transmit"
+    "vagrant"
+    "vagrant-vmware-utility"
+    "visual-studio-code"
+    "vmware-fusion10"
 )
 
-brew cask install "${apps[@]}"
+for app in "${apps[@]}"; do
+
+    if ! brew cask list -1 | grep -q "^${app}\$"; then
+        brew cask install $app
+    fi
+
+done
 
 # VSCode
 
