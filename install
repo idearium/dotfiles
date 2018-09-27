@@ -90,6 +90,9 @@ git config --file ${HOME}/.gitconfig --add user.email "$GIT_EMAIL"
 
 echo "Installed .gitconfig"
 
+echo "Executing homebrew.sh"
+source ${PWD}/homebrew.sh
+
 # Is there a custom.sh?
 if [ -e "${PWD}/custom.sh" ]; then
 	echo "Executing custom.sh"
