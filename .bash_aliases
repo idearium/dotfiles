@@ -18,6 +18,7 @@ alias v='vagrant'
 alias vs='vagrant ssh'
 alias vh='vagrant halt'
 alias vu='vagrant up'
+alias vgs='vagrant global-status'
 
 # git command shortcuts
 alias ga='git add -A'
