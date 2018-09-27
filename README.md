@@ -8,9 +8,7 @@ These dotfiles have been designed to work on Mac and Linux (tested on Ubuntu onl
 
 ## Requirements
 
-The following setup, and applications are expected for these dotfiles to function correctly:
-
-- Git, >2.0.1 (at `/usr/local/git/bin/git` on Mac)
+- Git
 
 ## Customisation
 
